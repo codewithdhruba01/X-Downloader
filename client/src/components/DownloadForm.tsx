@@ -97,11 +97,10 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
         <motion.button
           type="submit"
           disabled={isLoading}
-          className={`px-8 py-4 rounded-2xl font-semibold text-white flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
-            isLoading
+          className={`px-8 py-4 rounded-2xl font-semibold text-white flex items-center justify-center gap-2 shadow-lg cursor-pointer ${isLoading
               ? 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed'
               : 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-[0.98]'
-          } transition-all duration-200`}
+            } transition-all duration-200`}
           whileHover={isLoading ? {} : { scale: 1.02 }}
           whileTap={isLoading ? {} : { scale: 0.98 }}
         >

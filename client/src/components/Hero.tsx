@@ -3,7 +3,7 @@ import { Sparkles } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="text-center max-w-2xl mx-auto space-y-4 py-4">
+    <section className="text-center max-w-2xl mx-auto space-y-4 pt-16 pb-4">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
