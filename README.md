@@ -1,5 +1,9 @@
 # X-Media Downloader
 
+<p align="center">
+  <img src="client/public/og/home.png" alt="X-Media Downloader Cover" width="100%">
+</p>
+
 X-Media Downloader is a premium, full-stack, glassmorphic web application built with **React, Express, and TypeScript** that extracts direct, downloadable MP4 video stream URLs from public Twitter/X posts. 
 
 This project does not use the official Twitter API. Instead, it leverages a reverse-engineered token calculation and queries the public Twitter Syndication API, replicating the behavior of official embedded web widgets.
@@ -167,4 +171,23 @@ VITE_API_URL=http://localhost:5000
    - `VITE_API_URL`: `https://your-backend-api-url.onrender.com` (Your Render backend URL, without a trailing slash)
 5. Click **Deploy**.
 
-# X-Downloader
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+   
+⭐ If you find this project useful, please give it a star!
+
+**Built with ❤️ by [Dhrubaraj Pati](https://codewithdhruba.in/) for developers**
+
+[Website](https://codewithdhruba.in/) • [GitHub](https://github.com/codewithdhruba01) • [Twitter](https://x.com/codewithdhruba)
+
+</div>
