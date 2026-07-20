@@ -38,7 +38,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: step.number * 0.1 }}
-            className="glass-panel rounded-3xl p-8 border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 hover:border-slate-350/30 dark:hover:border-slate-800/80 transition-all duration-300 flex flex-col"
+            className="glass-panel rounded-3xl p-8 border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 transition-all duration-300 flex flex-col"
           >
             {/* Circular Step Number */}
             <div className="w-8 h-8 rounded-full bg-blue-500/10 dark:bg-blue-500/15 flex items-center justify-center text-[#1da1f2] font-bold text-sm mb-6">

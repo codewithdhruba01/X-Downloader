@@ -18,7 +18,7 @@ interface HistoryPanelProps {
 export default function HistoryPanel({ history, onSelect, onRemove, onClear }: HistoryPanelProps) {
   if (history.length === 0) {
     return (
-      <div className="w-full glass-panel rounded-3xl p-8 text-center flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
+      <div className="w-full rounded-3xl p-8 border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 text-center flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
         <ArchiveBook size={40} className="mb-3 opacity-60" />
         <p className="text-sm font-semibold">No Download History</p>
         <p className="text-xs mt-1 max-w-[250px]">Your recently processed Twitter/X videos will appear here for quick access.</p>
@@ -27,7 +27,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
   }
 
   return (
-    <div className="w-full glass-panel rounded-3xl p-6 relative">
+    <div className="w-full rounded-3xl p-6 border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 relative">
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100">
           <ArchiveBook size={20} className="text-indigo-500" />
@@ -56,7 +56,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-              className="flex items-center gap-3 p-3 rounded-2xl bg-white/40 dark:bg-slate-950/20 border border-slate-200/30 dark:border-slate-800/40 hover:border-slate-300 dark:hover:border-slate-700/80 transition-all group"
+              className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 dark:bg-[#070709]/40 border border-slate-200/10 dark:border-slate-800/30 transition-all group"
             >
               {/* Video Thumbnail Preview */}
               <div
