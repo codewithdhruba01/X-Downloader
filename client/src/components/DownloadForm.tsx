@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Clipboard, X, Link } from 'lucide-react';
+import { X, Link } from 'lucide-react';
 import toast from 'react-hot-toast';
+import CopyIcon from './svg/copy';
+import DownloadSquare from './svg/DownloadSquare';
 
 interface DownloadFormProps {
   onSubmit: (url: string) => void;
@@ -84,7 +86,7 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
                   className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:text-slate-500 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer flex items-center gap-1 text-xs font-semibold"
                   title="Paste link"
                 >
-                  <Clipboard className="w-4 h-4" />
+                  <CopyIcon size={16} />
                   <span className="hidden sm:inline">Paste</span>
                 </motion.button>
               )}
@@ -114,7 +116,7 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
             </>
           ) : (
             <>
-              <Download className="w-5 h-5" />
+              <DownloadSquare size={20} />
               <span>Download</span>
             </>
           )}

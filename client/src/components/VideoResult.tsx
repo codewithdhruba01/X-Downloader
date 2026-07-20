@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
-import { Download, Copy, Share2, ArrowLeft } from 'lucide-react';
+import { Share2, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import CopyIcon from './svg/copy';
+import DownloadSquare from './svg/DownloadSquare';
 import confetti from 'canvas-confetti';
 import type { TweetVideoResponse } from '../services/api';
 import { formatDuration } from '../utils/helpers';
@@ -172,7 +174,7 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
                       {copiedIndex === index ? (
                         <span className="text-xs font-bold text-emerald-500">Copied</span>
                       ) : (
-                        <Copy className="w-4 h-4" />
+                        <CopyIcon size={16} />
                       )}
                     </button>
 
@@ -182,7 +184,7 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
                       className="p-2 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 hover:bg-indigo-500 hover:text-white dark:hover:bg-indigo-600 text-indigo-600 dark:text-indigo-400 cursor-pointer transition-all flex items-center justify-center"
                       title="Download video"
                     >
-                      <Download className="w-4 h-4" />
+                      <DownloadSquare size={16} />
                     </button>
                   </div>
                 </div>

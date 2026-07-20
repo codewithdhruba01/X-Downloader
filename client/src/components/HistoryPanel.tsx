@@ -1,6 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, History, Download, PlayCircle } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 import type { HistoryItem } from '../hooks/useHistory';
+import ArchiveBook from './svg/ArchiveBook';
+import DownloadSquare from './svg/DownloadSquare';
+import DeleteIcon from './svg/Delete';
 
 
 import { formatHistoryDate, formatDuration } from '../utils/helpers';
@@ -16,7 +19,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
   if (history.length === 0) {
     return (
       <div className="w-full glass-panel rounded-3xl p-8 text-center flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
-        <History className="w-10 h-10 mb-3 opacity-60" />
+        <ArchiveBook size={40} className="mb-3 opacity-60" />
         <p className="text-sm font-semibold">No Download History</p>
         <p className="text-xs mt-1 max-w-[250px]">Your recently processed Twitter/X videos will appear here for quick access.</p>
       </div>
@@ -27,7 +30,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
     <div className="w-full glass-panel rounded-3xl p-6 relative">
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100">
-          <History className="w-5 h-5 text-indigo-500" />
+          <ArchiveBook size={20} className="text-indigo-500" />
           <h3 className="font-bold text-base">Download History</h3>
           <span className="bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs px-2 py-0.5 rounded-full font-bold">
             {history.length}
@@ -38,7 +41,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
           onClick={onClear}
           className="flex items-center gap-1.5 text-xs text-rose-500 hover:text-rose-600 dark:hover:text-rose-400 font-semibold cursor-pointer border border-rose-200 dark:border-rose-900/50 hover:bg-rose-500/5 px-3 py-1.5 rounded-xl transition-all"
         >
-          <Trash2 className="w-3.5 h-3.5" />
+          <DeleteIcon size={14} />
           <span>Clear All</span>
         </button>
       </div>
@@ -103,7 +106,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
                   className="p-2 rounded-xl text-indigo-500 hover:bg-indigo-500/10 cursor-pointer transition-colors"
                   title="Reload metadata"
                 >
-                  <Download className="w-4 h-4" />
+                  <DownloadSquare size={16} />
                 </button>
 
                 {/* Remove item button */}
@@ -112,7 +115,7 @@ export default function HistoryPanel({ history, onSelect, onRemove, onClear }: H
                   className="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 cursor-pointer transition-colors"
                   title="Delete from history"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <DeleteIcon size={16} />
                 </button>
               </div>
             </motion.div>
