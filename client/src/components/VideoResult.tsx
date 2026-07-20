@@ -48,10 +48,15 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
     }
   };
 
-  // Helper to trigger direct download, or open in new tab if CORS fails
+  // Helper to trigger direct download using backend proxy
   const triggerDownload = (videoUrl: string, quality: string) => {
-    toast.success(`Opening ${quality} video. If download doesn't start, right-click and save.`);
-    window.open(videoUrl, '_blank');
+    toast.success(`Starting download for ${quality} video...`);
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const cleanApiUrl = apiUrl.replace(/\/+$/, '');
+    const proxyUrl = `${cleanApiUrl}/api/download/proxy?url=${encodeURIComponent(videoUrl)}`;
+    
+    // Redirect window location to download file as attachment
+    window.location.href = proxyUrl;
   };
 
   // Get highest quality variant to play in preview
