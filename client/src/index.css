@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply transition-colors duration-300 min-h-screen text-slate-800 dark:text-slate-100 font-sans overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/30 dark:border-slate-800/50 shadow-xl;
+}
+
+.glass-panel-hover {
+  @apply hover:bg-white/80 dark:hover:bg-slate-900/70 hover:border-white/40 dark:hover:border-slate-800/70 hover:shadow-2xl transition-all duration-300;
+}
+
+.glass-input {
+  @apply bg-white/40 dark:bg-slate-950/40 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 focus:border-indigo-500/70 dark:focus:border-indigo-400/70 focus:bg-white/80 dark:focus:bg-slate-950/80 outline-none transition-all duration-300;
+}
+
+.glass-button {
+  @apply relative overflow-hidden backdrop-blur-md border border-white/20 shadow-lg active:scale-95 transition-all duration-200;
+}
+
+/* Background Gradients */
+.bg-gradient-mesh {
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.dark .bg-gradient-mesh {
+  background-color: #030712;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(236, 72, 153, 0.08) 0px, transparent 50%);
+}
+
+.light .bg-gradient-mesh {
+  background-color: #fafafa;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(244, 63, 94, 0.05) 0px, transparent 50%);
+}
+
+/* Glowing Border Effect */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 0.15;
+}
+
+.dark .glow-border:hover::after {
+  opacity: 0.4;
+}
+
+/* Audio Wave or Equalizer Micro-animations */
+.eq-bar {
+  display: inline-block;
+  width: 3px;
+  background-color: currentColor;
+  margin: 0 1px;
+  border-radius: 9999px;
+}
+
+.eq-bar-1 { animation: eq-rise 0.8s ease-in-out infinite alternate; }
+.eq-bar-2 { animation: eq-rise 1.1s ease-in-out infinite alternate; }
+.eq-bar-3 { animation: eq-rise 0.9s ease-in-out infinite alternate; }
+
+@keyframes eq-rise {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
