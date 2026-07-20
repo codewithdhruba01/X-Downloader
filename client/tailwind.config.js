@@ -13,6 +13,9 @@ export default {
           dark: 'rgba(15, 23, 42, 0.45)',
         }
       },
+      fontFamily: {
+        serif: ['"Instrument Serif"', 'serif'],
+      },
       backdropBlur: {
         xs: '2px',
       },

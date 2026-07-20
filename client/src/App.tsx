@@ -131,10 +131,10 @@ export default function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.15]"
+              className="text-5xl sm:text-6xl font-serif tracking-normal leading-[1.1]"
             >
               Download{' '}
-              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent italic font-medium">
                 Twitter/X Videos
               </span>{' '}
               Instantly
