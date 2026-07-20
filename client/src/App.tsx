@@ -9,6 +9,7 @@ import DownloadForm from './components/DownloadForm';
 import VideoResult from './components/VideoResult';
 import HistoryPanel from './components/HistoryPanel';
 import LoadingSkeleton from './components/LoadingSkeleton';
+import AuroraBars from './components/ui/AuroraBars';
 
 // Hooks & Services
 import { useHistory } from './hooks/useHistory';
@@ -84,7 +85,19 @@ export default function App() {
   };
 
   return (
-    <div className="bg-gradient-mesh min-h-screen pb-16 flex flex-col justify-between">
+    <div className="bg-gradient-mesh min-h-screen pb-16 flex flex-col justify-between relative overflow-x-hidden">
+      {/* Full Page Aurora Bars Background */}
+      <div className="fixed inset-0 z-0 opacity-35 dark:opacity-50 pointer-events-none">
+        <AuroraBars
+          barCount={32}
+          colors={['#6366f1', '#a855f7', '#ec4899', '#3b82f6', '#00000000']}
+          speed={0.15}
+          gap={5}
+          blur={12}
+          background="transparent"
+        />
+      </div>
+
       {/* Toast Notification Provider */}
       <Toaster 
         position="top-center" 
@@ -94,7 +107,7 @@ export default function App() {
         }} 
       />
 
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         {/* Navigation Bar */}
         <header className="py-6 flex justify-between items-center mb-10 border-b border-slate-200/20 dark:border-slate-800/30">
           <motion.div
