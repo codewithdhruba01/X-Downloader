@@ -63,7 +63,7 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ type: 'spring', duration: 0.4 }}
-      className="w-full glass-panel rounded-3xl p-6 shadow-2xl relative glow-border"
+      className="w-full rounded-3xl p-6 border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 relative shadow-2xl"
     >
       {/* Top action header */}
       <div className="flex justify-between items-center mb-6 border-b border-slate-200/30 dark:border-slate-800/50 pb-4">
@@ -153,7 +153,7 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
               {data.videos.map((video, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-3.5 rounded-2xl bg-white/40 dark:bg-slate-950/30 border border-slate-200/40 dark:border-slate-850/40 hover:border-slate-300 dark:hover:border-slate-800 shadow-sm transition-all duration-200"
+                  className="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 dark:bg-[#070709]/40 border border-slate-200/10 dark:border-slate-800/30 transition-all duration-200 shadow-sm"
                 >
                   <div className="flex flex-col">
                     <span className="font-bold text-slate-800 dark:text-slate-100 text-sm">
