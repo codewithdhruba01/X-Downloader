@@ -112,7 +112,7 @@ export default function App() {
         }}
       />
 
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+      <div className="container mx-auto px-4 max-w-5xl relative z-10 pt-24">
         {/* Navigation Bar */}
         <Navbar />
 

@@ -8,7 +8,7 @@ export default function ThemeToggle() {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="p-3 rounded-full bg-white/20 dark:bg-slate-900/40 border border-white/20 dark:border-slate-800/40 text-slate-700 dark:text-slate-200 shadow-md backdrop-blur-md cursor-pointer focus:outline-none hover:bg-white/30 dark:hover:bg-slate-900/60 flex items-center justify-center"
+      className="p-2 rounded-full text-slate-600 dark:text-slate-450 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer focus:outline-none flex items-center justify-center transition-colors"
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Toggle Theme"
