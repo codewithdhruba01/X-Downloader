@@ -6,12 +6,18 @@ export default function Footer() {
         {/* Left Section */}
         <div className="space-y-4 max-w-lg">
           <div>
-            <h3 className="text-slate-800 dark:text-slate-100 font-bold text-lg flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 fill-current text-[#1da1f2]" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-              <span>Media</span><span className="text-[#1da1f2]">.</span>
-            </h3>
+            <div className="flex items-center select-none">
+              <img
+                src="/logo/Xmedia_logo.png"
+                alt="X-Media Logo"
+                className="hidden dark:block h-14 w-auto object-contain"
+              />
+              <img
+                src="/logo/logo_light.png"
+                alt="X-Media Logo"
+                className="block dark:hidden h-14 w-auto object-contain"
+              />
+            </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-2 font-medium">
               Open source Twitter/X video downloader. No popups, no fake buttons, no tracking. One paste, every quality.
             </p>
