@@ -129,7 +129,7 @@ export default function App() {
             transition={{ delay: 0.4 }}
             className="w-full max-w-3xl mx-auto"
           >
-            <div className="glass-panel p-6 rounded-3xl shadow-xl border border-white/20 dark:border-slate-800/40">
+            <div className="p-6 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 shadow-xl">
               <DownloadForm onSubmit={handleDownload} isLoading={isLoading} />
             </div>
           </motion.section>

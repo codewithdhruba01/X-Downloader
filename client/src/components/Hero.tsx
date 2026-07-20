@@ -1,18 +1,26 @@
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 
 export default function Hero() {
   return (
     <section className="text-center max-w-2xl mx-auto space-y-4 pt-16 pb-4">
-      <motion.div
+      <motion.a
+        href="https://github.com/codewithdhruba01/X-Downloader"
+        target="_blank"
+        rel="noopener noreferrer"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-semibold shadow-inner border border-indigo-500/10"
+        className="inline-flex items-center gap-2.5 p-1 pr-4 rounded-full border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 hover:bg-slate-200/5 dark:hover:bg-white/5 transition-all duration-300 shadow-sm text-xs cursor-pointer"
       >
-        <Sparkles className="w-3.5 h-3.5" />
-        <span>Educational Video Downloader Tool</span>
-      </motion.div>
+        {/* Left Badge */}
+        <span className="px-3 py-1 rounded-full bg-blue-500/10 dark:bg-blue-500/15 text-[#1da1f2] font-semibold text-[11px] tracking-wide">
+          GitHub
+        </span>
+        {/* Right Description */}
+        <span className="text-slate-500 dark:text-slate-400 font-medium">
+          Help support the founding team
+        </span>
+      </motion.a>
 
       <motion.h1
         initial={{ opacity: 0, y: 15 }}
