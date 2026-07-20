@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="text-center max-w-2xl mx-auto space-y-4 pt-16 pb-4">
+    <section className="text-center max-w-2xl mx-auto space-y-4 pt-28 pb-4">
       <motion.a
         href="https://github.com/codewithdhruba01/X-Downloader"
         target="_blank"
@@ -18,7 +18,7 @@ export default function Hero() {
         </span>
         {/* Right Description */}
         <span className="text-slate-500 dark:text-slate-400 font-medium">
-          Help support the founding team
+          100% Free & Open Source Project
         </span>
       </motion.a>
 

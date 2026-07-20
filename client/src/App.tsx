@@ -89,8 +89,8 @@ export default function App() {
 
   return (
     <div className="bg-gradient-mesh min-h-screen pb-16 flex flex-col justify-between relative overflow-x-hidden">
-      {/* Aurora Bars Background - extending just below the DownloadForm */}
-      <div className="absolute top-0 left-0 right-0 h-[780px] z-0 opacity-35 dark:opacity-50 pointer-events-none overflow-hidden">
+      {/* Aurora Bars Background - extending further down */}
+      <div className="absolute top-0 left-0 right-0 h-[1100px] z-0 opacity-35 dark:opacity-50 pointer-events-none overflow-hidden">
         <AuroraBars
           barCount={32}
           colors={['#6366f1', '#a855f7', '#ec4899', '#3b82f6', '#00000000']}
@@ -100,7 +100,7 @@ export default function App() {
           background="transparent"
         />
         {/* Bottom fade mask to transition into solid background */}
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#fafafa] dark:from-[#070709] via-[#fafafa]/80 dark:via-[#070709]/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#fafafa] dark:from-[#070709] via-[#fafafa]/80 dark:via-[#070709]/80 to-transparent" />
       </div>
 
       {/* Toast Notification Provider */}
@@ -124,6 +124,7 @@ export default function App() {
 
           {/* Form Section */}
           <motion.section
+            id="download-form-section"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -156,7 +157,7 @@ export default function App() {
           </section>
 
           {/* Stacked Panels: History and How to Use */}
-          <section className="flex flex-col gap-12 w-full max-w-4xl mx-auto pt-36 border-t border-slate-200/5 dark:border-slate-800/10">
+          <section className="flex flex-col gap-12 w-full max-w-4xl mx-auto pt-20 border-t border-slate-200/5 dark:border-slate-800/10">
 
             {/* History Panel */}
             <motion.div
