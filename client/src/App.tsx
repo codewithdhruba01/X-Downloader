@@ -222,7 +222,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="pt-6"
+                className="pt-28"
               >
                 <ProfileAnalyzer />
               </motion.div>

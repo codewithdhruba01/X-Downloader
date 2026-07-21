@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import {
@@ -18,7 +18,8 @@ import {
   BookOpen,
   ChevronRight,
   Target,
-  FileText
+  FileText,
+  ChevronDown
 } from 'lucide-react';
 import { analyzeProfile } from '../services/api';
 import type { ProfileAnalysisResponse } from '../services/api';
@@ -53,12 +54,28 @@ export default function ProfileAnalyzer() {
   const [username, setUsername] = useState('');
   const [niche, setNiche] = useState(NICHES[0]);
   const [followerCount, setFollowerCount] = useState(FOLLOWER_TIERS[0].value);
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStepIdx, setLoadingStepIdx] = useState(0);
   const [result, setResult] = useState<ProfileAnalysisResponse | null>(null);
   const [activeResultTab, setActiveResultTab] = useState<'overview' | 'checklist' | 'strategy' | 'templates'>('overview');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const [isNicheOpen, setIsNicheOpen] = useState(false);
+  const nicheRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (nicheRef.current && !nicheRef.current.contains(event.target as Node)) {
+        setIsNicheOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Rotate loading steps
   useEffect(() => {
@@ -110,17 +127,26 @@ export default function ProfileAnalyzer() {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
       {/* Hero Header */}
-      <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold tracking-wide uppercase">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>New Feature</span>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-          X (Twitter) <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-[#1da1f2] to-indigo-600">Profile Analyzer</span>
-        </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
+      <div className="text-center space-y-4 max-w-2xl mx-auto pb-4">
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-5xl sm:text-6xl font-serif tracking-normal leading-[1.1]"
+        >
+          X/Twitter{' '}
+          <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent italic font-medium">
+            Profile Analyzer
+          </span>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-lg mx-auto leading-relaxed"
+        >
           Analyze your profile, optimize your layout, and get custom growth frameworks to take your account to the next level.
-        </p>
+        </motion.p>
       </div>
 
       <AnimatePresence mode="wait">
@@ -155,43 +181,73 @@ export default function ProfileAnalyzer() {
               </div>
 
               {/* Niche Selection */}
-              <div className="space-y-2">
+              <div className="space-y-2 relative" ref={nicheRef}>
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-350">
                   Your Target Niche
                 </label>
-                <select
-                  value={niche}
-                  onChange={(e) => setNiche(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl glass-input text-base font-medium bg-white dark:bg-slate-900 cursor-pointer"
+                <button
+                  type="button"
+                  onClick={() => setIsNicheOpen(!isNicheOpen)}
+                  className="w-full px-4 py-3 rounded-2xl glass-input text-base font-medium text-left flex items-center justify-between cursor-pointer"
                 >
-                  {NICHES.map((n) => (
-                    <option key={n} value={n} className="dark:bg-slate-955">
-                      {n}
-                    </option>
-                  ))}
-                </select>
+                  <span className="text-slate-800 dark:text-slate-200">{niche}</span>
+                  <ChevronDown className={`w-5 h-5 text-slate-400 dark:text-slate-500 transition-transform duration-300 ${isNicheOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                <AnimatePresence>
+                  {isNicheOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute z-20 w-full mt-2 rounded-2xl border border-slate-200/20 dark:border-slate-800/40 bg-white dark:bg-[#0f0f12] backdrop-blur-xl shadow-xl overflow-hidden"
+                    >
+                      <div className="py-1.5 max-h-60 overflow-y-auto">
+                        {NICHES.map((n) => (
+                          <button
+                            key={n}
+                            type="button"
+                            onClick={() => {
+                              setNiche(n);
+                              setIsNicheOpen(false);
+                            }}
+                            className={`w-full px-4 py-3 text-left text-sm font-semibold flex items-center justify-between transition-colors hover:bg-slate-100 dark:hover:bg-slate-900/60 cursor-pointer ${niche === n
+                                ? 'text-[#1da1f2] dark:text-sky-400 bg-slate-50/50 dark:bg-slate-900/40'
+                                : 'text-slate-700 dark:text-slate-350 hover:text-slate-900 dark:hover:text-slate-100'
+                              }`}
+                          >
+                            <span>{n}</span>
+                            {niche === n && (
+                              <Check className="w-4 h-4 text-[#1da1f2] dark:text-sky-400" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Followers Tier Selection */}
-              <div className="space-y-2">
+              <div className="space-y-3 text-center">
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-350">
                   Current Follower Size
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="flex flex-wrap justify-center gap-2.5 max-w-xl mx-auto">
                   {FOLLOWER_TIERS.map((tier) => (
                     <button
                       key={tier.value}
                       type="button"
                       onClick={() => setFollowerCount(tier.value)}
-                      className={`px-4 py-3 rounded-2xl border text-left text-sm font-semibold transition-all duration-300 active:scale-98 flex items-center justify-between cursor-pointer ${
-                        followerCount === tier.value
-                          ? 'border-[#1da1f2] bg-[#1da1f2]/10 text-[#1da1f2] dark:text-sky-400'
-                          : 'border-slate-200/50 dark:border-slate-800/40 bg-white/20 dark:bg-slate-900/20 text-slate-600 dark:text-slate-400 hover:bg-slate-100/50 dark:hover:bg-slate-900/50'
-                      }`}
+                      className={`px-4 py-2 rounded-xl border text-center text-xs font-semibold transition-all duration-300 active:scale-98 flex items-center justify-center gap-1.5 cursor-pointer ${followerCount === tier.value
+                        ? 'border-[#1da1f2] bg-[#1da1f2]/10 text-[#1da1f2] dark:text-sky-400'
+                        : 'border-slate-200/50 dark:border-slate-800/40 bg-white/20 dark:bg-slate-900/20 text-slate-600 dark:text-slate-400 hover:bg-slate-100/50 dark:hover:bg-slate-900/50'
+                        }`}
                     >
                       <span>{tier.label}</span>
                       {followerCount === tier.value && (
-                        <CheckCircle2 className="w-4 h-4 text-[#1da1f2] dark:text-sky-400" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#1da1f2] dark:text-sky-400 flex-shrink-0" />
                       )}
                     </button>
                   ))}
@@ -344,8 +400,8 @@ export default function ProfileAnalyzer() {
                     {result.auditScore.overall >= 80
                       ? 'Optimized'
                       : result.auditScore.overall >= 60
-                      ? 'Needs Tweaks'
-                      : 'Needs Overhaul'}
+                        ? 'Needs Tweaks'
+                        : 'Needs Overhaul'}
                   </div>
                 </div>
               </div>
@@ -366,11 +422,10 @@ export default function ProfileAnalyzer() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveResultTab(tab.id)}
-                    className={`flex items-center gap-1.5 px-4 py-3 border-b-2 font-bold text-xs md:text-sm transition-all cursor-pointer ${
-                      activeResultTab === tab.id
-                        ? 'border-[#1da1f2] text-[#1da1f2]'
-                        : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                    }`}
+                    className={`flex items-center gap-1.5 px-4 py-3 border-b-2 font-bold text-xs md:text-sm transition-all cursor-pointer ${activeResultTab === tab.id
+                      ? 'border-[#1da1f2] text-[#1da1f2]'
+                      : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                      }`}
                   >
                     <Icon className="w-4 h-4" />
                     <span>{tab.label}</span>
@@ -407,13 +462,12 @@ export default function ProfileAnalyzer() {
                           </div>
                           <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
                             <div
-                              className={`h-full rounded-full ${
-                                item.score >= 80
-                                  ? 'bg-green-500'
-                                  : item.score >= 60
+                              className={`h-full rounded-full ${item.score >= 80
+                                ? 'bg-green-500'
+                                : item.score >= 60
                                   ? 'bg-amber-500'
                                   : 'bg-rose-500'
-                              }`}
+                                }`}
                               style={{ width: `${item.score}%` }}
                             />
                           </div>
@@ -515,13 +569,12 @@ export default function ProfileAnalyzer() {
                               {item.task}
                             </h4>
                             <span
-                              className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
-                                item.impact === 'High'
-                                  ? 'bg-rose-500/10 text-rose-500 dark:text-rose-455'
-                                  : item.impact === 'Medium'
+                              className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${item.impact === 'High'
+                                ? 'bg-rose-500/10 text-rose-500 dark:text-rose-455'
+                                : item.impact === 'Medium'
                                   ? 'bg-amber-500/10 text-amber-600 dark:text-amber-455'
                                   : 'bg-indigo-500/10 text-indigo-500 dark:text-indigo-400'
-                              }`}
+                                }`}
                             >
                               {item.impact} Impact
                             </span>
