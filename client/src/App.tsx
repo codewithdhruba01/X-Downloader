@@ -13,6 +13,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
+import ProfileAnalyzer from './components/ProfileAnalyzer';
 
 // Hooks & Services
 import { useHistory } from './hooks/useHistory';
@@ -24,6 +25,7 @@ import { getTweetId } from './utils/helpers';
 export default function App() {
   const { history, addHistoryItem, removeHistoryItem, clearHistory } = useHistory();
 
+  const [activeTab, setActiveTab] = useState<'downloader' | 'analyzer'>('downloader');
   const [videoData, setVideoData] = useState<TweetVideoResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
@@ -114,95 +116,118 @@ export default function App() {
 
       <div className="container mx-auto px-4 max-w-5xl relative z-10 pt-24">
         {/* Navigation Bar */}
-        <Navbar />
+        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Main Content Area */}
         <main className="space-y-10">
+          <AnimatePresence mode="wait">
+            {activeTab === 'downloader' ? (
+              <motion.div
+                key="downloader-view"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-10"
+              >
+                {/* Hero Section */}
+                <Hero />
 
-          {/* Hero Section */}
-          <Hero />
+                {/* Form Section */}
+                <motion.section
+                  id="download-form-section"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="w-full max-w-3xl mx-auto"
+                >
+                  <div className="p-6 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 shadow-xl">
+                    <DownloadForm onSubmit={handleDownload} isLoading={isLoading} />
+                  </div>
+                </motion.section>
 
-          {/* Form Section */}
-          <motion.section
-            id="download-form-section"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="w-full max-w-3xl mx-auto"
-          >
-            <div className="p-6 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 shadow-xl">
-              <DownloadForm onSubmit={handleDownload} isLoading={isLoading} />
-            </div>
-          </motion.section>
+                {/* Results Display */}
+                <section className="w-full max-w-3xl mx-auto">
+                  <AnimatePresence mode="wait">
+                    {isLoading && (
+                      <div key="loading">
+                        <LoadingSkeleton />
+                      </div>
+                    )}
 
-          {/* Results Display */}
-          <section className="w-full max-w-3xl mx-auto">
-            <AnimatePresence mode="wait">
-              {isLoading && (
-                <div key="loading">
-                  <LoadingSkeleton />
-                </div>
-              )}
+                    {videoData && !isLoading && (
+                      <div key="result">
+                        <VideoResult
+                          data={videoData}
+                          originalUrl={currentUrl}
+                          onClear={handleClearResult}
+                        />
+                      </div>
+                    )}
+                  </AnimatePresence>
+                </section>
 
-              {videoData && !isLoading && (
-                <div key="result">
-                  <VideoResult
-                    data={videoData}
-                    originalUrl={currentUrl}
-                    onClear={handleClearResult}
-                  />
-                </div>
-              )}
-            </AnimatePresence>
-          </section>
+                {/* Stacked Panels: History and How to Use */}
+                <section className="flex flex-col gap-12 w-full max-w-4xl mx-auto pt-20 border-t border-slate-200/5 dark:border-slate-800/10">
 
-          {/* Stacked Panels: History and How to Use */}
-          <section className="flex flex-col gap-12 w-full max-w-4xl mx-auto pt-20 border-t border-slate-200/5 dark:border-slate-800/10">
+                  {/* History Panel */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="w-full max-w-3xl mx-auto"
+                  >
+                    <HistoryPanel
+                      history={history}
+                      onSelect={handleSelectHistory}
+                      onRemove={removeHistoryItem}
+                      onClear={clearHistory}
+                    />
+                  </motion.div>
 
-            {/* History Panel */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="w-full max-w-3xl mx-auto"
-            >
-              <HistoryPanel
-                history={history}
-                onSelect={handleSelectHistory}
-                onRemove={removeHistoryItem}
-                onClear={clearHistory}
-              />
-            </motion.div>
+                  {/* How It Works Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="w-full"
+                  >
+                    <HowItWorks />
+                  </motion.div>
 
-            {/* How It Works Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="w-full"
-            >
-              <HowItWorks />
-            </motion.div>
+                  {/* Legal and compliance disclaimer */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 }}
+                    className="w-full max-w-3xl mx-auto"
+                  >
+                    <div className="glass-panel rounded-3xl p-6 bg-rose-50/20 dark:bg-rose-950/5 border border-rose-250/20 dark:border-rose-900/30">
+                      <h3 className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-2 text-xs mb-3 uppercase tracking-wider">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>Educational Disclaimer</span>
+                      </h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                        This tool is built solely for educational and research purposes. It only accesses content that is already exposed in public tweet widgets. Users are fully responsible for complying with the platform's Terms of Service and local copyright laws. Do not distribute copyrighted material.
+                      </p>
+                    </div>
+                  </motion.div>
 
-            {/* Legal and compliance disclaimer */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="w-full max-w-3xl mx-auto"
-            >
-              <div className="glass-panel rounded-3xl p-6 bg-rose-50/20 dark:bg-rose-950/5 border border-rose-250/20 dark:border-rose-900/30">
-                <h3 className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-2 text-xs mb-3 uppercase tracking-wider">
-                  <ShieldAlert className="w-4 h-4" />
-                  <span>Educational Disclaimer</span>
-                </h3>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                  This tool is built solely for educational and research purposes. It only accesses content that is already exposed in public tweet widgets. Users are fully responsible for complying with the platform's Terms of Service and local copyright laws. Do not distribute copyrighted material.
-                </p>
-              </div>
-            </motion.div>
-
-          </section>
+                </section>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="analyzer-view"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="pt-6"
+              >
+                <ProfileAnalyzer />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </main>
       </div>
 

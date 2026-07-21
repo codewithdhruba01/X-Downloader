@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { logger } from './utils/logger';
 import { apiRateLimiter } from './middleware/rateLimiter';
 import downloadRouter from './routes/download';
+import analyzeRouter from './routes/analyze';
 
 // Load environment variables
 dotenv.config();
@@ -71,6 +72,7 @@ app.get('/api/health', (req: Request, res: Response) => {
 
 // 7. API Routes
 app.use('/api/download', downloadRouter);
+app.use('/api/analyze', analyzeRouter);
 
 // 8. 404 Route Handler
 app.use((req: Request, res: Response) => {
