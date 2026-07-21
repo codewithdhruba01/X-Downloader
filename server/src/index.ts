@@ -23,9 +23,9 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl, or server-to-server)
       if (!origin) return callback(null, true);
-      
+
       const allowedOrigins = [CORS_ORIGIN];
-      
+
       // During development, allow localhost variations
       if (NODE_ENV === 'development') {
         allowedOrigins.push('http://localhost:5173', 'http://127.0.0.1:5173');
@@ -80,8 +80,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error('Unhandled Server Error:', err);
   res.status(500).json({
     success: false,
-    error: NODE_ENV === 'production' 
-      ? 'A critical server error occurred.' 
+    error: NODE_ENV === 'production'
+      ? 'A critical server error occurred.'
       : err.message
   });
 });

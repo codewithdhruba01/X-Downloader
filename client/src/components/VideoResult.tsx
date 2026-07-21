@@ -53,14 +53,19 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
     toast.success(`Starting download for ${quality} video...`);
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     const cleanApiUrl = apiUrl.replace(/\/+$/, '');
-    const proxyUrl = `${cleanApiUrl}/api/download/proxy?url=${encodeURIComponent(videoUrl)}`;
+    const proxyUrl = `${cleanApiUrl}/api/download/proxy?url=${encodeURIComponent(videoUrl)}&dl=1`;
     
     // Redirect window location to download file as attachment
     window.location.href = proxyUrl;
   };
 
-  // Get highest quality variant to play in preview
-  const previewVideoUrl = data.videos[0]?.url || '';
+  // Get highest quality variant to play in preview (routed through backend proxy to bypass CORS/403 blocks)
+  const rawPreviewUrl = data.videos[0]?.url || '';
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const cleanApiUrl = apiUrl.replace(/\/+$/, '');
+  const previewVideoUrl = rawPreviewUrl
+    ? `${cleanApiUrl}/api/download/proxy?url=${encodeURIComponent(rawPreviewUrl)}`
+    : '';
 
   return (
     <motion.div

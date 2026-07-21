@@ -72,23 +72,45 @@ export async function proxyDownloadController(req: Request, res: Response): Prom
       return;
     }
 
-    logger.info(`Proxying video download for: ${videoUrl}`);
+    logger.info(`Proxying video stream for: ${videoUrl}`);
+
+    const headers: Record<string, string> = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Referer': 'https://twitter.com/',
+    };
+
+    // Forward range header if present to support seekable video streams in preview
+    if (req.headers.range) {
+      headers['Range'] = req.headers.range;
+    }
 
     // Fetch video stream from twimg
     const response = await axios({
       method: 'get',
       url: videoUrl,
       responseType: 'stream',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://twitter.com/',
+      headers,
+      validateStatus: (status) => status >= 200 && status < 300,
+    });
+
+    // Set response status code (e.g. 206 for partial content range requests)
+    res.status(response.status);
+
+    // Copy stream headers back to client
+    const headersToCopy = ['content-type', 'content-length', 'content-range', 'accept-ranges'];
+    headersToCopy.forEach((header) => {
+      if (response.headers[header]) {
+        res.setHeader(header, response.headers[header]);
       }
     });
 
-    // Set headers to trigger file download in browser
-    const contentType = response.headers['content-type'];
-    res.setHeader('Content-Type', typeof contentType === 'string' ? contentType : 'video/mp4');
-    res.setHeader('Content-Disposition', `attachment; filename="x-media-${Date.now()}.mp4"`);
+    // Set Content-Disposition based on query parameter
+    const isDownload = req.query.dl === '1';
+    if (isDownload) {
+      res.setHeader('Content-Disposition', `attachment; filename="x-media-${Date.now()}.mp4"`);
+    } else {
+      res.setHeader('Content-Disposition', 'inline');
+    }
 
     response.data.pipe(res);
   } catch (error: any) {
