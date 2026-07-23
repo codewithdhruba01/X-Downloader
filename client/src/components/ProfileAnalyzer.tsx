@@ -163,12 +163,12 @@ export default function ProfileAnalyzer() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Username Input */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
+                <label className="block text-sm font-normal text-slate-900 dark:text-white">
                   X/Twitter Username
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 dark:text-slate-550">
-                    <span className="font-semibold text-lg">@</span>
+                    <span className="font-normal text-lg">@</span>
                   </div>
                   <input
                     type="text"
@@ -176,22 +176,22 @@ export default function ProfileAnalyzer() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="elonmusk"
-                    className="w-full pl-9 pr-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 focus:border-slate-400/60 dark:focus:border-white/30 outline-none text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base font-medium shadow-sm transition-all duration-200"
+                    className="w-full pl-9 pr-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 focus:border-slate-400/60 dark:focus:border-white/30 outline-none text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base font-normal shadow-sm transition-all duration-200"
                   />
                 </div>
               </div>
 
               {/* Niche Selection */}
               <div className="space-y-2 relative" ref={nicheRef}>
-                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
+                <label className="block text-sm font-normal text-slate-900 dark:text-white">
                   Your Target Niche
                 </label>
                 <button
                   type="button"
                   onClick={() => setIsNicheOpen(!isNicheOpen)}
-                  className="w-full px-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 text-slate-900 dark:text-white text-base font-medium text-left flex items-center justify-between cursor-pointer shadow-sm transition-all duration-200"
+                  className="w-full px-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 text-slate-900 dark:text-white text-base font-normal text-left flex items-center justify-between cursor-pointer shadow-sm transition-all duration-200"
                 >
-                  <span className="text-slate-800 dark:text-slate-200">{niche}</span>
+                  <span className="text-slate-800 dark:text-slate-200 font-normal">{niche}</span>
                   <ChevronDown className={`w-5 h-5 text-slate-400 dark:text-slate-500 transition-transform duration-300 ${isNicheOpen ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -213,7 +213,7 @@ export default function ProfileAnalyzer() {
                               setNiche(n);
                               setIsNicheOpen(false);
                             }}
-                            className={`w-full px-4 py-3 text-left text-sm font-semibold flex items-center justify-between transition-colors hover:bg-slate-100 dark:hover:bg-[#222226] cursor-pointer ${niche === n
+                            className={`w-full px-4 py-3 text-left text-sm font-normal flex items-center justify-between transition-colors hover:bg-slate-100 dark:hover:bg-[#222226] cursor-pointer ${niche === n
                                 ? 'text-[#1da1f2] dark:text-sky-400 bg-slate-50/50 dark:bg-slate-900/40'
                                 : 'text-slate-700 dark:text-slate-350 hover:text-slate-900 dark:hover:text-slate-100'
                               }`}
@@ -232,7 +232,7 @@ export default function ProfileAnalyzer() {
 
               {/* Followers Tier Selection */}
               <div className="space-y-3 text-center">
-                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
+                <label className="block text-sm font-normal text-slate-900 dark:text-white">
                   Current Follower Size
                 </label>
                 <div className="flex flex-wrap justify-center gap-2.5 max-w-xl mx-auto">
@@ -241,7 +241,7 @@ export default function ProfileAnalyzer() {
                       key={tier.value}
                       type="button"
                       onClick={() => setFollowerCount(tier.value)}
-                      className={`px-4 py-2 rounded-xl border text-center text-xs font-semibold transition-all duration-300 active:scale-98 flex items-center justify-center gap-1.5 cursor-pointer ${followerCount === tier.value
+                      className={`px-4 py-2 rounded-xl border text-center text-xs font-normal transition-all duration-300 active:scale-98 flex items-center justify-center gap-1.5 cursor-pointer ${followerCount === tier.value
                         ? 'border-[#1da1f2] bg-[#1da1f2]/10 text-[#1da1f2] dark:text-sky-400'
                         : 'border-slate-200/50 dark:border-slate-800/40 bg-white/20 dark:bg-slate-900/20 text-slate-600 dark:text-slate-400 hover:bg-slate-100/50 dark:hover:bg-slate-900/50'
                         }`}
@@ -746,7 +746,7 @@ export default function ProfileAnalyzer() {
             <div className="flex justify-center pt-8">
               <button
                 onClick={() => setResult(null)}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-slate-200/50 dark:border-slate-800/40 bg-white dark:bg-slate-900 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 shadow-sm transition-all cursor-pointer"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-slate-200/50 dark:border-slate-800/40 bg-white dark:bg-slate-900 text-sm font-normal text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 shadow-sm transition-all cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Analyze Another Profile</span>
