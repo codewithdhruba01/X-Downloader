@@ -93,7 +93,7 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
                   title="Paste link from clipboard"
                 >
                   <CopyIcon size={14} />
-                  <span>Paste</span>
+
                 </motion.button>
               )}
             </AnimatePresence>
@@ -106,11 +106,10 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
           disabled={isLoading}
           whileHover={isLoading ? {} : { scale: 1.02 }}
           whileTap={isLoading ? {} : { scale: 0.97 }}
-          className={`h-12 px-6 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center border transition-all duration-200 cursor-pointer shadow-sm w-full sm:w-auto min-w-[120px] ${
-            isLoading
+          className={`h-12 px-6 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center border transition-all duration-200 cursor-pointer shadow-sm w-full sm:w-auto min-w-[120px] ${isLoading
               ? 'bg-slate-100 dark:bg-[#161618] text-slate-400 dark:text-slate-500 border-slate-200 dark:border-white/10 cursor-not-allowed'
               : 'bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30'
-          }`}
+            }`}
         >
           {isLoading ? (
             <div className="flex items-center gap-2">

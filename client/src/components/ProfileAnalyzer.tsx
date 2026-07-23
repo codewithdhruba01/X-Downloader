@@ -175,7 +175,7 @@ export default function ProfileAnalyzer() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="elonmusk"
-                    className="w-full pl-9 pr-4 py-3 rounded-2xl glass-input text-base font-medium"
+                    className="w-full pl-9 pr-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 focus:border-slate-400/60 dark:focus:border-white/30 outline-none text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base font-medium shadow-sm transition-all duration-200"
                   />
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function ProfileAnalyzer() {
                 <button
                   type="button"
                   onClick={() => setIsNicheOpen(!isNicheOpen)}
-                  className="w-full px-4 py-3 rounded-2xl glass-input text-base font-medium text-left flex items-center justify-between cursor-pointer"
+                  className="w-full px-4 py-3 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 text-slate-900 dark:text-white text-base font-medium text-left flex items-center justify-between cursor-pointer shadow-sm transition-all duration-200"
                 >
                   <span className="text-slate-800 dark:text-slate-200">{niche}</span>
                   <ChevronDown className={`w-5 h-5 text-slate-400 dark:text-slate-500 transition-transform duration-300 ${isNicheOpen ? 'rotate-180' : ''}`} />
@@ -201,7 +201,7 @@ export default function ProfileAnalyzer() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute z-20 w-full mt-2 rounded-2xl border border-slate-200/20 dark:border-slate-800/40 bg-white dark:bg-[#0f0f12] backdrop-blur-xl shadow-xl overflow-hidden"
+                      className="absolute z-20 w-full mt-2 rounded-2xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-[#161618] backdrop-blur-xl shadow-xl overflow-hidden"
                     >
                       <div className="py-1.5 max-h-60 overflow-y-auto">
                         {NICHES.map((n) => (
@@ -212,7 +212,7 @@ export default function ProfileAnalyzer() {
                               setNiche(n);
                               setIsNicheOpen(false);
                             }}
-                            className={`w-full px-4 py-3 text-left text-sm font-semibold flex items-center justify-between transition-colors hover:bg-slate-100 dark:hover:bg-slate-900/60 cursor-pointer ${niche === n
+                            className={`w-full px-4 py-3 text-left text-sm font-semibold flex items-center justify-between transition-colors hover:bg-slate-100 dark:hover:bg-[#222226] cursor-pointer ${niche === n
                                 ? 'text-[#1da1f2] dark:text-sky-400 bg-slate-50/50 dark:bg-slate-900/40'
                                 : 'text-slate-700 dark:text-slate-350 hover:text-slate-900 dark:hover:text-slate-100'
                               }`}
@@ -255,14 +255,16 @@ export default function ProfileAnalyzer() {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center">
-                <button
+              <div className="flex justify-center pt-2">
+                <motion.button
                   type="submit"
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-500 via-[#1da1f2] to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold transition-all duration-300 shadow-md shadow-[#1da1f2]/10 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="h-12 px-7 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center gap-2 border transition-all duration-200 cursor-pointer shadow-sm bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30"
                 >
                   <span>Analyze Profile</span>
-                  <ArrowRight className="w-5 h-5" />
-                </button>
+                  <ArrowRight className="w-4 h-4" />
+                </motion.button>
               </div>
             </form>
           </motion.div>
