@@ -190,7 +190,7 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
                     {/* Download Button */}
                     <button
                       onClick={() => triggerDownload(video.url, video.quality)}
-                      className="h-9 px-3 rounded-xl bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30 cursor-pointer transition-all flex items-center gap-1.5 text-xs font-medium shadow-sm active:scale-95"
+                      className="h-9 px-3 rounded-xl bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30 cursor-pointer transition-all flex items-center gap-1.5 text-xs font-normal shadow-sm active:scale-95"
                       title="Download video"
                     >
                       <span>Download</span>

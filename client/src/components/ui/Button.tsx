@@ -23,7 +23,7 @@ export default function Button({
 }: ButtonProps) {
   const isButtonDisabled = disabled || isLoading;
 
-  const baseStyles = 'rounded-2xl font-medium flex items-center justify-center gap-2 border transition-all duration-200 cursor-pointer shadow-sm';
+  const baseStyles = 'rounded-2xl font-normal flex items-center justify-center gap-2 border transition-all duration-200 cursor-pointer shadow-sm';
 
   const sizeStyles = {
     sm: 'h-9 px-3 text-xs',
