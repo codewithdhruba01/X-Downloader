@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Link } from 'lucide-react';
 import toast from 'react-hot-toast';
 import CopyIcon from './svg/copy';
-import DownloadSquare from './svg/DownloadSquare';
 
 interface DownloadFormProps {
   onSubmit: (url: string) => void;
@@ -58,66 +57,71 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             disabled={isLoading}
-            className="w-full pl-11 pr-20 py-4 rounded-2xl glass-input text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base shadow-inner"
+            className="w-full pl-11 pr-28 py-3.5 rounded-2xl glass-input text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm sm:text-base shadow-inner h-12"
           />
 
           {/* Quick actions: Paste / Clear */}
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center gap-1.5">
-            <AnimatePresence>
+          <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+            <AnimatePresence mode="wait">
               {url ? (
                 <motion.button
+                  key="clear-btn"
                   type="button"
                   onClick={handleClear}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 dark:text-slate-500 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="h-9 px-3 rounded-xl font-medium text-xs flex items-center gap-1.5 border transition-all duration-200 cursor-pointer shadow-sm bg-white dark:bg-[#161618] hover:bg-rose-50 dark:hover:bg-rose-950/30 text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 border-slate-200/90 dark:border-white/15 hover:border-rose-300 dark:hover:border-rose-800/50"
                   title="Clear input"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Clear</span>
                 </motion.button>
               ) : (
                 <motion.button
+                  key="paste-btn"
                   type="button"
                   onClick={handlePaste}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:text-slate-500 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer flex items-center gap-1 text-xs font-semibold"
-                  title="Paste link"
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="h-9 px-3.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-1.5 border transition-all duration-200 cursor-pointer shadow-sm bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30"
+                  title="Paste link from clipboard"
                 >
-                  <CopyIcon size={16} />
-                  <span className="hidden sm:inline">Paste</span>
+                  <CopyIcon size={14} />
+                  <span>Paste</span>
                 </motion.button>
               )}
             </AnimatePresence>
           </div>
         </div>
 
+        {/* Download Button */}
         <motion.button
           type="submit"
           disabled={isLoading}
-          className={`px-8 py-4 rounded-2xl font-semibold text-white flex items-center justify-center gap-2 shadow-lg cursor-pointer ${isLoading
-              ? 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed'
-              : 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-[0.98]'
-            } transition-all duration-200`}
           whileHover={isLoading ? {} : { scale: 1.02 }}
-          whileTap={isLoading ? {} : { scale: 0.98 }}
+          whileTap={isLoading ? {} : { scale: 0.97 }}
+          className={`h-12 px-6 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center border transition-all duration-200 cursor-pointer shadow-sm w-full sm:w-auto min-w-[120px] ${
+            isLoading
+              ? 'bg-slate-100 dark:bg-[#161618] text-slate-400 dark:text-slate-500 border-slate-200 dark:border-white/10 cursor-not-allowed'
+              : 'bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30'
+          }`}
         >
           {isLoading ? (
-            <>
-              {/* Spinner */}
-              <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <div className="flex items-center gap-2">
+              <svg className="animate-spin h-4 w-4 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
               <span>Analyzing...</span>
-            </>
+            </div>
           ) : (
-            <>
-              <DownloadSquare size={20} />
-              <span>Download</span>
-            </>
+            <span>Download</span>
           )}
         </motion.button>
       </div>

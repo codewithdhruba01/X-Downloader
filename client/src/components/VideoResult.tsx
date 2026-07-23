@@ -3,7 +3,6 @@ import { Share2, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import CopyIcon from './svg/copy';
-import DownloadSquare from './svg/DownloadSquare';
 import confetti from 'canvas-confetti';
 import type { TweetVideoResponse } from '../services/api';
 import { formatDuration } from '../utils/helpers';
@@ -191,10 +190,22 @@ export default function VideoResult({ data, originalUrl, onClear }: VideoResultP
                     {/* Download Button */}
                     <button
                       onClick={() => triggerDownload(video.url, video.quality)}
-                      className="p-2 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 hover:bg-indigo-500 hover:text-white dark:hover:bg-indigo-600 text-indigo-600 dark:text-indigo-400 cursor-pointer transition-all flex items-center justify-center"
+                      className="h-9 px-3 rounded-xl bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30 cursor-pointer transition-all flex items-center gap-1.5 text-xs font-medium shadow-sm active:scale-95"
                       title="Download video"
                     >
-                      <DownloadSquare size={16} />
+                      <span>Download</span>
+                      <svg
+                        className="w-3.5 h-3.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 19V5" />
+                        <path d="M5 12l7-7 7 7" />
+                      </svg>
                     </button>
                   </div>
                 </div>
