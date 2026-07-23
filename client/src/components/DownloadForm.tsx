@@ -57,7 +57,7 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             disabled={isLoading}
-            className="w-full pl-11 pr-28 py-3.5 rounded-2xl glass-input text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm sm:text-base shadow-inner h-12"
+            className="w-full pl-11 pr-28 py-3.5 rounded-2xl bg-white dark:bg-[#161618] border border-slate-200/90 dark:border-white/15 focus:border-slate-400/60 dark:focus:border-white/30 outline-none text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm sm:text-base shadow-sm transition-all duration-200 h-12"
           />
 
           {/* Quick actions: Paste / Clear */}
