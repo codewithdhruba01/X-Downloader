@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Link } from 'lucide-react';
 import toast from 'react-hot-toast';
 import CopyIcon from './svg/copy';
+import Button from './ui/Button';
 
 interface DownloadFormProps {
   onSubmit: (url: string) => void;
@@ -101,28 +102,14 @@ export default function DownloadForm({ onSubmit, isLoading }: DownloadFormProps)
         </div>
 
         {/* Download Button */}
-        <motion.button
+        <Button
           type="submit"
-          disabled={isLoading}
-          whileHover={isLoading ? {} : { scale: 1.02 }}
-          whileTap={isLoading ? {} : { scale: 0.97 }}
-          className={`h-12 px-6 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center border transition-all duration-200 cursor-pointer shadow-sm w-full sm:w-auto min-w-[120px] ${isLoading
-              ? 'bg-slate-100 dark:bg-[#161618] text-slate-400 dark:text-slate-500 border-slate-200 dark:border-white/10 cursor-not-allowed'
-              : 'bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30'
-            }`}
+          isLoading={isLoading}
+          loadingText="Analyzing..."
+          className="w-full sm:w-auto"
         >
-          {isLoading ? (
-            <div className="flex items-center gap-2">
-              <svg className="animate-spin h-4 w-4 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              <span>Analyzing...</span>
-            </div>
-          ) : (
-            <span>Download</span>
-          )}
-        </motion.button>
+          Download
+        </Button>
       </div>
     </form>
   );

@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { analyzeProfile } from '../services/api';
 import type { ProfileAnalysisResponse } from '../services/api';
+import Button from './ui/Button';
 
 const NICHES = [
   'Tech & Coding',
@@ -256,15 +257,12 @@ export default function ProfileAnalyzer() {
 
               {/* Submit Button */}
               <div className="flex justify-center pt-2">
-                <motion.button
+                <Button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="h-12 px-7 rounded-2xl font-medium text-sm sm:text-base flex items-center justify-center gap-2 border transition-all duration-200 cursor-pointer shadow-sm bg-white dark:bg-[#161618] hover:bg-slate-50 dark:hover:bg-[#222226] text-slate-900 dark:text-white border-slate-200/90 dark:border-white/15 hover:border-slate-300 dark:hover:border-white/30"
+                  icon={<ArrowRight className="w-4 h-4" />}
                 >
-                  <span>Analyze Profile</span>
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
+                  Analyze Profile
+                </Button>
               </div>
             </form>
           </motion.div>
