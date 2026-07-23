@@ -158,12 +158,12 @@ export default function ProfileAnalyzer() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            className="p-6 md:p-8 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 backdrop-blur-md shadow-xl max-w-2xl mx-auto"
+            className="p-6 md:p-8 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 backdrop-blur-md shadow-xl max-w-xl mx-auto"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Username Input */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-350">
+                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
                   X/Twitter Username
                 </label>
                 <div className="relative">
@@ -183,7 +183,7 @@ export default function ProfileAnalyzer() {
 
               {/* Niche Selection */}
               <div className="space-y-2 relative" ref={nicheRef}>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-350">
+                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
                   Your Target Niche
                 </label>
                 <button
@@ -232,7 +232,7 @@ export default function ProfileAnalyzer() {
 
               {/* Followers Tier Selection */}
               <div className="space-y-3 text-center">
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-350">
+                <label className="block text-sm font-semibold text-slate-900 dark:text-white">
                   Current Follower Size
                 </label>
                 <div className="flex flex-wrap justify-center gap-2.5 max-w-xl mx-auto">
@@ -509,34 +509,34 @@ export default function ProfileAnalyzer() {
 
                   {/* Strategic Insights Card */}
                   <div className="md:col-span-2 p-6 rounded-3xl border border-slate-200/20 dark:border-slate-800/40 bg-white/5 dark:bg-[#0f0f12]/60 backdrop-blur-md shadow-lg space-y-4">
-                    <h3 className="text-base font-extrabold flex items-center gap-2 text-slate-850 dark:text-slate-100">
+                    <h3 className="text-base font-semibold flex items-center gap-2 text-slate-850 dark:text-slate-100">
                       <Zap className="w-5 h-5 text-amber-500" />
                       <span>Key Growth Diagnosis</span>
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="p-4 bg-slate-100/50 dark:bg-slate-900/40 border border-slate-200/30 dark:border-slate-800/40 rounded-2xl space-y-1">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">
                           Niche Focus
                         </div>
-                        <p className="text-xs font-semibold text-slate-750 dark:text-slate-300">
+                        <p className="text-xs font-normal text-slate-750 dark:text-slate-300">
                           {result.strategy.nicheFocus}
                         </p>
                       </div>
 
                       <div className="p-4 bg-rose-500/5 dark:bg-rose-500/10 border border-rose-250/20 dark:border-rose-900/30 rounded-2xl space-y-1">
-                        <div className="text-xs font-bold text-rose-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <div className="text-xs font-medium text-rose-500 uppercase tracking-wider flex items-center gap-1.5">
                           <span>Primary Bottleneck</span>
                         </div>
-                        <p className="text-xs font-extrabold text-slate-750 dark:text-slate-200">
+                        <p className="text-xs font-normal text-slate-750 dark:text-slate-200">
                           {result.strategy.growthBottleneck}
                         </p>
                       </div>
 
                       <div className="p-4 bg-green-500/5 dark:bg-green-500/10 border border-green-250/20 dark:border-green-900/30 rounded-2xl space-y-1">
-                        <div className="text-xs font-bold text-green-500 uppercase tracking-wider">
+                        <div className="text-xs font-medium text-green-500 uppercase tracking-wider">
                           Core Focus Goal
                         </div>
-                        <p className="text-xs font-extrabold text-slate-750 dark:text-slate-200">
+                        <p className="text-xs font-normal text-slate-750 dark:text-slate-200">
                           {result.strategy.primaryGoal}
                         </p>
                       </div>
