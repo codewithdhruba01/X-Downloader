@@ -19,6 +19,25 @@ This project does not use the official Twitter API. Instead, it leverages a reve
 - **Advanced Backend Protections**: Integrates helmet security headers, custom logging, and rate limiting (max 30 download requests/15 mins per IP).
 - **TypeScript Everywhere**: Strong types on both frontend and backend for robust, type-safe execution.
 
+## Tech Stack
+
+**Frontend Client**
+- **React 19** - Component-based UI library
+- **TypeScript** - Static typing for robust code
+- **Vite** - Lightning-fast build tool and development server
+- **Tailwind CSS** - Utility-first styling framework
+- **Framer Motion** - Powerful library for fluid animations
+- **Lucide React** - Clean and modern SVG icon pack
+- **React Hot Toast** - Toast notifications
+
+**Backend Server**
+- **Node.js** - JavaScript runtime environment
+- **Express.js** - Fast, unopinionated web framework
+- **TypeScript** - Static typing for backend services
+- **Axios** - Promise-based HTTP client for external requests
+- **Helmet** - Express middleware for securing HTTP headers
+- **Express Rate Limit** - Basic rate-limiting middleware
+
 ## Project Directory Structure
 
 ```
@@ -171,6 +190,16 @@ VITE_API_URL=http://localhost:5000
    - `VITE_API_URL`: `https://your-backend-api-url.onrender.com` (Your Render backend URL, without a trailing slash)
 5. Click **Deploy**.
 
+
+## Reflections
+
+Building X-Media Downloader was a challenging but rewarding experience that involved both frontend polish and backend reverse-engineering. 
+
+**Key Learnings & Challenges:**
+- **API Reverse-Engineering**: The biggest hurdle was bypassing the need for an official Twitter API key, which has become highly restricted. By analyzing how Twitter embeds tweets on third-party sites, I learned how to leverage the public Syndication API.
+- **Token Generation Logic**: Discovering the mathematical formula to generate valid request tokens (multiplying the Snowflake ID by Pi and converting to Base36) was a fascinating dive into how platforms secure their internal endpoints.
+- **Advanced UI/UX**: On the frontend, I wanted to move away from typical, boring utility apps. Using `framer-motion` alongside Tailwind's custom configurations allowed me to build a premium, glassmorphic interface with micro-animations that feel responsive and alive.
+- **State & Persistence**: Managing local storage for the download history, alongside the dark/light mode toggle, helped solidify my understanding of maintaining complex, persistent states in a modern React application.
 
 ## Contributing
 
